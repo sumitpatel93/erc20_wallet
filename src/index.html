@@ -10,8 +10,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -59,10 +58,124 @@
             </div>
           </div>
       </div>
+<div id="TransactionDetails">
+<button type="button" class="btn btn-primary" onclick="loadXMLDoc()" style="margin-bottom:10px;">Get TransactionList</button>
+   <div class="container">
+  <h2>Recent Transaction Details</h2>
+           
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>TRX hash</th>
+        <th>Block Number</th>
+        <th>To</th>
+        
+        <th>Gas Price</th>
+        <th>Time Stamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div id="trx1"></div></td>
+        <td><div id="blocknumber1"></div></td>
+        <td><div id="to_1"></div></td>       
+        <td><div id="gp_1"></div></td>
+        <td><div id="ts_1"></div></td>
+      </tr>
+      <tr>
+        <td><div id="trx2"></td>
+        <td><div id="blocknumber2"></div></td>
+        <td><div id="to_2"></div></td>        
+        <td><div id="gp_2"></div></td>
+        <td><div id="ts_2"></div></td>
+      </tr>
+      <tr>
+        <td><div id="trx3"></td>
+        <td><div id="blocknumber3"></div></td>
+        <td><div id="to_3"></div></td>       
+        <td><div id="gp_3"></div></td>
+        <td><div id="ts_3"></div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+
+</div>
+<div id="demo1">
+<button type="button" class="btn btn-primary" onclick="loadXMLDoc1()" style="margin-bottom:10px;">Get current blocknumber</button>
+</div>
+<div id="demo2">
+<button type="button" class="btn btn-primary" onclick="loadXMLDoc2()" style="margin-bottom:1px;">Get current gas price</button>
+</div>
+
+
+
+<script>
+function loadXMLDoc() {
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {  
+    var json = JSON.parse(xhr.responseText);              
+      document.getElementById("trx1").innerHTML = json.result[1].hash;
+      document.getElementById("trx2").innerHTML = json.result[2].hash; 
+      document.getElementById("trx3").innerHTML = json.result[3].hash;
+
+      document.getElementById("blocknumber1").innerHTML = json.result[1].blockNumber; 
+      document.getElementById("blocknumber2").innerHTML = json.result[2].blockNumber;
+      document.getElementById("blocknumber3").innerHTML = json.result[3].blockNumber;
+      
+      document.getElementById("to_1").innerHTML = json.result[1].to;
+      document.getElementById("to_2").innerHTML = json.result[2].to;
+      document.getElementById("to_3").innerHTML = json.result[3].to;
+
+      document.getElementById("gp_1").innerHTML = json.result[1].gasPrice;
+      document.getElementById("gp_2").innerHTML = json.result[2].gasPrice;
+      document.getElementById("gp_3").innerHTML = json.result[3].gasPrice;
+
+      document.getElementById("ts_1").innerHTML = json.result[1].timeStamp;
+      document.getElementById("ts_2").innerHTML = json.result[2].timeStamp;
+      document.getElementById("ts_3").innerHTML = json.result[3].timeStamp;
+    }
+  };
+  xhr.open("GET", "http://api.etherscan.io/api?module=account&action=txlist&address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&startblock=1&endblock=99999&sort=asc&apikey= IWFIFMMG91JZBDJUE6XCJUV939PJPU8X7F");
+  xhr.send(null);
+}
+
+
+function loadXMLDoc1() {
+  var xhr = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var json = JSON.parse(xhr.responseText);
+      document.getElementById("demo1").innerHTML = json.result;
+      
+    }
+  };
+  xhr.open("GET", "https://api.etherscan.io/api?module=proxy&action=eth_blockNumber&apikey=IWFIFMMG91JZBDJUE6XCJUV939PJPU8X7F");
+  xhr.send(null);
+}
+
+
+
+function loadXMLDoc2() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo2	").innerHTML = this.responseText;      
+    }
+
+  };
+  xhttp.open("GET", "https://api.etherscan.io/api?module=proxy&action=eth_gasPrice&apikey=IWFIFMMG91JZBDJUE6XCJUV939PJPU8X7F");
+  xhttp.send();
+}
 
 
 
 
+</script>
 
 
     </div> 
