@@ -35,3 +35,17 @@
     text-decoration: none;
     cursor: pointer;
 }
+.tokenMarket{
+  margin-bottom: 20px;
+  margin-left: 20px;
+  border: 1px solid #dee3ea;
+  width: 15%;
+  text-align: center;
+
+}
+.tokenMarket>a:hover{
+    text-decoration: none !important;
+}
+.border{
+    border: 1px solid #dee3ea;
+}

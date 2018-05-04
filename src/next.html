@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>TutorialToken - Wallet</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="./css/style.css">
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="col-md-12 main-wrapper">
+     
+      <h3>Top Five Tokens</h3>
+       <div id="id01" class="col-md-3 border"></div><div class="symbol border" class="col-md-3" id="sy1"></div>
+       <div id="id02" class="col-md-3 border"></div><div class="symbol border" class="col-md-3" id="sy2"></div>
+       <div id="id03" class="col-md-3 border"></div><div class="symbol border" class="col-md-3" id="sy3"></div>
+       <div id="id04" class="col-md-3 border"></div><div class="symbol border" class="col-md-3" id="sy4"></div>
+       <div id="id05" class="col-md-3 border"></div><div class="symbol border" class="col-md-3" id="sy5"></div>
+
+
+
+<script>
+
+   var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {  
+    var json = JSON.parse(xhr.responseText);              
+      document.getElementById("id01").innerHTML = json.tokens[1].name;
+      document.getElementById("id02").innerHTML = json.tokens[2].name;
+      document.getElementById("id03").innerHTML = json.tokens[3].name;
+      document.getElementById("id04").innerHTML = json.tokens[4].name;
+      document.getElementById("id05").innerHTML = json.tokens[5].name;
+
+      document.getElementById("sy1").innerHTML = json.tokens[1].symbol;
+      document.getElementById("sy2").innerHTML = json.tokens[2].symbol;
+      document.getElementById("sy3").innerHTML = json.tokens[3].symbol;
+      document.getElementById("sy4").innerHTML = json.tokens[4].symbol;
+      document.getElementById("sy5").innerHTML = json.tokens[5].symbol;
+
+     }
+  };
+  xhr.open("GET", "https://api.ethplorer.io/getTopTokens?apiKey=freekey");
+  xhr.send();
+
+
+</script>
+     
+   
+     </div> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+  </html>
