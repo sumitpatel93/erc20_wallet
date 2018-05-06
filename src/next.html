@@ -20,11 +20,50 @@
     <div class="col-md-12 main-wrapper">
      
       <h3>Top Five Tokens</h3>
-       <div id="id01" class="col-md-3 border"></div><div class="symbol border" class="col-md-3" id="sy1"></div>
-       <div id="id02" class="col-md-3 border"></div><div class="symbol border" class="col-md-3" id="sy2"></div>
-       <div id="id03" class="col-md-3 border"></div><div class="symbol border" class="col-md-3" id="sy3"></div>
-       <div id="id04" class="col-md-3 border"></div><div class="symbol border" class="col-md-3" id="sy4"></div>
-       <div id="id05" class="col-md-3 border"></div><div class="symbol border" class="col-md-3" id="sy5"></div>
+       <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Token Name</th>
+        <th>Symbol</th>
+        <th>Rate</th>
+        
+      
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div id="id01"></div></td>
+        <td><div id="sy1"></div></td>
+        <td><div id="p1"></div></td>       
+       
+      </tr>
+      <tr>
+        <td><div id="id02"></td>
+        <td><div id="sy2"></div></td>
+        <td><div id="p2"></div></td>        
+       
+      </tr>
+      <tr>
+        <td><div id="id03"></td>
+        <td><div id="sy3"></div></td>
+        <td><div id="p3"></div></td>       
+       
+      </tr>
+      <tr>
+        <td><div id="id04"></td>
+        <td><div id="sy4"></div></td>
+        <td><div id="p4"></div></td>       
+       
+      </tr>
+      <tr>
+        <td><div id="id05"></td>
+        <td><div id="sy5"></div></td>
+        <td><div id="p5"></div></td>       
+       
+      </tr>
+    </tbody>
+  </table>
+  <div id="token-history-grouped-3"></div>
 
 
 
@@ -46,12 +85,41 @@
       document.getElementById("sy4").innerHTML = json.tokens[4].symbol;
       document.getElementById("sy5").innerHTML = json.tokens[5].symbol;
 
+      document.getElementById("p1").innerHTML = json.tokens[1].price.rate;
+      document.getElementById("p2").innerHTML = json.tokens[2].price.rate;
+      document.getElementById("p3").innerHTML = json.tokens[3].price.rate;
+      document.getElementById("p4").innerHTML = json.tokens[4].price.rate;
+      document.getElementById("p5").innerHTML = json.tokens[5].price.rate;
+
      }
   };
   xhr.open("GET", "https://api.ethplorer.io/getTopTokens?apiKey=freekey");
   xhr.send();
 
+ if (typeof (eWgs) === 'undefined') {
+        document.write('<scr' + 'ipt src="https://api.ethplorer.io/widget.js?' + new Date().getTime().toString().substr(0, 7) + '" async></scr' + 'ipt>');
+        var eWgs = [];
+    }
+    eWgs.push(function () {
+        ethplorerWidget.init(
+            '#token-history-grouped-3', // Placeholder element
+            'tokenHistoryGrouped', // Widget type
+            {
+                'theme': 'dark',
+                options: {
 
+                    'title': 'Ethereum Tokens Pulse',
+                    'hAxis': {
+                        'title': '90 days token operations chart',
+                    },
+                    'vAxis': {
+                        'title': 'Token operations',
+                    }
+                }
+            }
+
+        );
+    });
 </script>
      
    
